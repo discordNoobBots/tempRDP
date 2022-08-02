@@ -1,6 +1,14 @@
 name: Windows
 
-on: [push, workflow_dispatch]
+on: 
+
+  workflow_dispatch:
+    inputs:
+      NGROK_AUTH_TOKEN:
+        description: 'Enter Your NGROK Auth Token'
+        required: true
+        default: 'asidjaijdiasdjaoidjqw_asjduiajdiasd'
+        type: string
 
 jobs:
   init:
@@ -16,7 +24,7 @@ jobs:
       - name: Auth Ngrok
         run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
         env:
-          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+          NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
       - name: Enable TS
         run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
       - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
