@@ -40,7 +40,7 @@ jobs:
         run: |
           New-Item "C:\ngrok" -type directory
           Copy-Item ".\ngrok\ngrok.exe" -Destination "C:\ngrok\"
-          .\windows\n2n\edge_install.exe install
+
       - name: Auth Ngrok
         run: C:\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
         env:
