@@ -26,6 +26,15 @@ jobs:
       
       - name: Install ngrok
         run: sudo snap install ngrok
+        
+      - name: Auth Ngrok
+        run: ngrok authtoken $Env:NGROK_AUTH_TOKEN
+        env:
+          NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
+          
+      - name: Create Tunnel
+        run: ngrok tcp 3389
+
 
       - name: Prepare the self-destruct trigger
         run: |
