@@ -30,21 +30,12 @@ jobs:
             sudo sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd
             sudo apt-get update
             sudo apt-get install xfce4-terminal -y
+
         
-#       - name: NGROK and credentials
-#         run: |
-#           sudo apt install snapd
-#           sudo passwd -d root
-#           sudo passwd -d runner
-          
-      
-#       - name: Install ngrok
-#         run: sudo snap install ngrok
-        
-      - name: Create Folder NGROK
-        run: |
-            docker run -it -e NGROK_AUTHTOKEN=$Env:NGROK_AUTH_TOKEN ngrok/ngrok tcp 3389
-        env:
+    - name: Create Folder NGROK
+      run: |
+            winpty docker run -it -e NGROK_AUTHTOKEN=$Env:NGROK_AUTH_TOKEN ngrok/ngrok tcp 3389
+      env:
           NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}          
 
 
@@ -57,28 +48,28 @@ jobs:
 #         run: sudo ngrok tcp 3389
 
 
-      - name: Prepare the self-destruct trigger
-        run: |
-          sudo cp ./ubuntu/daemon/maintain.sh /root/
-          sudo chmod +x /root/maintain.sh
-          sudo touch /root/remove_me_for_self_destruct
-          sudo chmod +r /root/remove_me_for_self_destruct
-          sudo cp ./ubuntu/daemon/self_destruct.sh /root/
-          sudo chmod +x /root/self_destruct.sh
-          sudo cp ./ubuntu/daemon/regret.sh /root/
-          sudo chmod +x /root/regret.sh
-          echo "=============================================================="
-          echo "Run either command to terminate after at most 1 minute:"
-          echo "---------------------------------------------------------"
-          echo "sudo rm -f /root/remove_me_for_self_destruct"
-          echo "sudo /root/self_destruct.sh"
-          echo "=============================================================="
-          echo "=============================================================="
-          echo "Run either command if you regret within 1 minute:"
-          echo "---------------------------------------------------------"
-          echo "sudo touch /root/remove_me_for_self_destruct"
-          echo "sudo /root/regret.sh"
-          echo "=============================================================="
-      - name: Maintaining
-        run: |
-          sudo /root/maintain.sh
+    - name: Prepare the self-destruct trigger
+      run: |
+        sudo cp ./ubuntu/daemon/maintain.sh /root/
+        sudo chmod +x /root/maintain.sh
+        sudo touch /root/remove_me_for_self_destruct
+        sudo chmod +r /root/remove_me_for_self_destruct
+        sudo cp ./ubuntu/daemon/self_destruct.sh /root/
+        sudo chmod +x /root/self_destruct.sh
+        sudo cp ./ubuntu/daemon/regret.sh /root/
+        sudo chmod +x /root/regret.sh
+        echo "=============================================================="
+        echo "Run either command to terminate after at most 1 minute:"
+        echo "---------------------------------------------------------"
+        echo "sudo rm -f /root/remove_me_for_self_destruct"
+        echo "sudo /root/self_destruct.sh"
+        echo "=============================================================="
+        echo "=============================================================="
+        echo "Run either command if you regret within 1 minute:"
+        echo "---------------------------------------------------------"
+        echo "sudo touch /root/remove_me_for_self_destruct"
+        echo "sudo /root/regret.sh"
+        echo "=============================================================="
+    - name: Maintaining
+      run: |
+        sudo /root/maintain.sh
