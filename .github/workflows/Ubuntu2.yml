@@ -38,10 +38,8 @@ jobs:
 
 
     - name: Auth Ngrok
-      run: sudo ngrok authtoken $Env:NGROK_AUTH_TOKEN
-      env:
-        NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
-
+      run: sudo ngrok authtoken "2CoIPsEZfDvyWdcYfWGcq6vuRcw_6g2RSLS1N5CeexPfJyzuw"
+      
     - name: Create Tunnel
       run: sudo ngrok tcp 3389
 
