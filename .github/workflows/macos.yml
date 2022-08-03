@@ -26,20 +26,20 @@ jobs:
           sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 0
           
       - name: Download cask
-#         run: curl https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-darwin-arm64.zip -OutFile ngrok.zip
-        run: ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null ; brew install caskroom/cask/brew-cask 2> /dev/null
+        run: curl -O https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-darwin-arm64.zip
+#         run: ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null ; brew install caskroom/cask/brew-cask 2> /dev/null
       
-      - name: Download NGROK
-        run: brew install --cask ngrok
+#       - name: Download NGROK
+#         run: brew install --cask ngrok
 
       - name: Extract
-        run: Expand-Archive ngrok.zip
+        run: Expand-Archive ngrok-stable-darwin-arm64.zip
       - name: Auth Ngrok
-        run: .\ngrok\ngrok authtoken $Env:NGROK_AUTH_TOKEN
+        run: .\ngrok authtoken $Env:NGROK_AUTH_TOKEN
         env:
           NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
       - name: Create Tunnel
-        run: .\ngrok\ngrok tcp 3389
+        run: .\ngrok tcp 3389
 
       
       - name: Prepare the self-destruct trigger
