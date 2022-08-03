@@ -36,7 +36,7 @@ jobs:
 
 
       - name: Auth Ngrok
-        run: ./ngrok authtoken $Env:NGROK_AUTH_TOKEN
+        run: ./ngrok/ngrok authtoken $Env:NGROK_AUTH_TOKEN
         env:
           NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
       - name: Create Tunnel
