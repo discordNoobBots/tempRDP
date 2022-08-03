@@ -17,15 +17,15 @@ jobs:
         uses: actions/checkout@v2
         
         
-      - name: NGROK and credentials
-        run: |
-          sudo apt install snapd
-          sudo passwd -d root
-          sudo passwd -d runner
+#       - name: NGROK and credentials
+#         run: |
+#           sudo apt install snapd
+#           sudo passwd -d root
+#           sudo passwd -d runner
           
       
-      - name: Install ngrok
-        run: sudo snap install ngrok
+#       - name: Install ngrok
+#         run: sudo snap install ngrok
         
       - name: Create Folder NGROK
         run: |
