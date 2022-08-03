@@ -29,7 +29,7 @@ jobs:
 #       - name: Create Folder NGROK
 #         run: sudo mkdir /home/runner/.config/ngrok
       - name: Auth Ngrok
-        run: sudo ngrok authtoken $Env:NGROK_AUTH_TOKEN --config ./ngrok/ngrok.yml
+        run: sudo ngrok authtoken $Env:NGROK_AUTH_TOKEN --config ./ngrok.yml
         env:
           NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
           
