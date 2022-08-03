@@ -29,7 +29,14 @@ jobs:
         
       - name: Create Folder NGROK
         run: |
-          sudo chmod 700 /home/runner/.ssh
+          sudo echo "deb http://us.archive.ubuntu.com/ubuntu/ bionic universe" >> /etc/apt/sources.list
+          sudo apt-get update
+          sudo apt -y install vnc4server
+          sudo apt-get install xfce4 -y
+          sudo echo "xfce4-session" > ~/.xsession
+          sudo apt install firefox -y
+          sudo vncpasswd
+          sudo vncserver -geometry 1366x768
           
 
 
