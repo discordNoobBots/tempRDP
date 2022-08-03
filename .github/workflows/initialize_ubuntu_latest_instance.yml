@@ -26,12 +26,14 @@ jobs:
       
       - name: Install ngrok
         run: sudo snap install ngrok
-      - name: Create Folder NGROK
-        run: sudo chmod 700 ./
+#       - name: Create Folder NGROK
+#         run: |
+#           sudo mkdir ./ngrok
+#           sudo chmod 700 ./
 
 
       - name: Auth Ngrok
-        run: sudo ngrok authtoken $Env:NGROK_AUTH_TOKEN --config ./ngrok.yml
+        run: sudo ngrok authtoken $Env:NGROK_AUTH_TOKEN --config ./ubuntu/ngrok.yml
         env:
           NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
           
