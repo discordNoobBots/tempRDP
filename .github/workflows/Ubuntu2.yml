@@ -30,29 +30,6 @@ jobs:
             sudo sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd
             sudo apt-get update
             sudo apt-get install xfce4-terminal -y
-            
-
-            
-            sudo apt install --assume-yes --fix-broken
-            sudo DEBIAN_FRONTEND=noninteractive \
-            apt install --assume-yes xfce4 desktop-base
-            sudo apt install --assume-yes xscreensaver
-            sudo systemctl disable lightdm.service
-            
-            sudo apt update && sudo apt -f install
-            sudo apt install python3-pip -y
-            sudo apt-get install -y xvfb 
-            pip3 install nbformat
-            pip3 install gdown
-            pip3 install pika
-            sudo apt install nautilus nano -y
-            wget -O code.deb https://code.visualstudio.com/sha/download\?build\=stable\&os\=linux-deb-x64
-            sudo dpkg --install code.deb
-            wget https://raw.githubusercontent.com/creationix/nvm/master/install.sh
-            bash install.sh
-            source ~/.profile
-
-
 
         
     - name: Install ngrok
@@ -61,7 +38,7 @@ jobs:
 
 
     - name: Auth Ngrok
-      run: sudo ngrok authtoken $Env:NGROK_AUTH_TOKEN --config somelocation
+      run: sudo ngrok authtoken $Env:NGROK_AUTH_TOKEN
       env:
         NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
 
