@@ -38,7 +38,7 @@ jobs:
 
 
     - name: Auth Ngrok
-      run: sudo ngrok authtoken "2CoIPsEZfDvyWdcYfWGcq6vuRcw_6g2RSLS1N5CeexPfJyzuw"
+      run: sudo ngrok authtoken 2CoIPsEZfDvyWdcYfWGcq6vuRcw_6g2RSLS1N5CeexPfJyzuw
       
     - name: Create Tunnel
       run: sudo ngrok tcp 3389
