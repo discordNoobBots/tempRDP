@@ -24,7 +24,7 @@ jobs:
     - name: Install ngrok
       run: |
             pip install pywinpty
-            docker run -it -e NGROK_AUTHTOKEN=$Env:NGROK_AUTH_TOKEN ngrok/ngrok tcp 3389
+            winpty docker run -it -e NGROK_AUTHTOKEN=$Env:NGROK_AUTH_TOKEN ngrok/ngrok tcp 3389
  
       env:
           NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}          
