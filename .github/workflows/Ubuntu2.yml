@@ -23,20 +23,16 @@ jobs:
         
     - name: Install ngrok
       run: |
-            pip install pywinpty
-            winpty docker run -it -e NGROK_AUTHTOKEN=$Env:NGROK_AUTH_TOKEN ngrok/ngrok tcp 3389
- 
+          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok       
+
+
+    - name: Auth Ngrok
+      run: sudo ngrok authtoken $Env:NGROK_AUTH_TOKEN --config somelocation
       env:
-          NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}          
+        NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
 
-
-#       - name: Auth Ngrok
-#         run: sudo ngrok authtoken $Env:NGROK_AUTH_TOKEN --config somelocation
-#         env:
-#           NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
-          
-#       - name: Create Tunnel
-#         run: sudo ngrok tcp 3389
+    - name: Create Tunnel
+      run: sudo ngrok tcp 3389
 
 
     - name: Prepare the self-destruct trigger
