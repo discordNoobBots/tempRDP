@@ -29,24 +29,18 @@ jobs:
         
       - name: Create Folder NGROK
         run: |
-          sudo echo "deb http://us.archive.ubuntu.com/ubuntu/ bionic universe" >> /etc/apt/sources.list
-          sudo apt-get update
-          sudo apt -y install vnc4server
-          sudo apt-get install xfce4 -y
-          sudo echo "xfce4-session" > ~/.xsession
-          sudo apt install firefox -y
-          sudo vncpasswd
-          sudo vncserver -geometry 1366x768
-          
-
-
-      - name: Auth Ngrok
-        run: sudo ngrok authtoken $Env:NGROK_AUTH_TOKEN --config /home/runner/.ssh/ngrok.yml
+            docker run -it -e NGROK_AUTHTOKEN=$Env:NGROK_AUTH_TOKEN ngrok/ngrok tcp 3389
         env:
-          NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
+          NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}          
+
+
+#       - name: Auth Ngrok
+#         run: sudo ngrok authtoken $Env:NGROK_AUTH_TOKEN --config somelocation
+#         env:
+#           NGROK_AUTH_TOKEN: ${{ inputs.NGROK_AUTH_TOKEN }}
           
-      - name: Create Tunnel
-        run: sudo ngrok tcp 3389
+#       - name: Create Tunnel
+#         run: sudo ngrok tcp 3389
 
 
       - name: Prepare the self-destruct trigger
