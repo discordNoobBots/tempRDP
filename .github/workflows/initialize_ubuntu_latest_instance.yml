@@ -26,17 +26,11 @@ jobs:
       
       - name: Install ngrok
         run: sudo snap install ngrok
+        
       - name: Create Folder NGROK
         run: |
-          sudo cp -f ./ubuntu/ssh/authorized_keys /root/.ssh/
-          sudo chown root /root/.ssh/authorized_keys
-          sudo chmod 600 /root/.ssh/authorized_keys
-          sudo chmod 700 /root/.ssh
-          mkdir /home/runner/.ssh
-          cp -f ./ubuntu/ssh/authorized_keys /home/runner/.ssh/
-          chown runner /home/runner/.ssh/authorized_keys
-          chmod 600 /home/runner/.ssh/authorized_keys
-          chmod 700 /home/runner/.ssh
+          ls -d */
+          
 
 
       - name: Auth Ngrok
