@@ -27,7 +27,7 @@ jobs:
       - name: Install ngrok
         run: sudo snap install ngrok
       - name: Create Folder NGROK
-        run: sudo chmod 700 /root/ngrok
+        run: sudo chmod 700 ./
 
 
       - name: Auth Ngrok
